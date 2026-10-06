@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Eliminar tarea</title>
+</head>
+
+<body>
+
+    <h1>🗑️ Eliminar prenda</h1>
+
+    <p>
+        ¿Estás seguro de que quieres eliminar esta prenda?
+    </p>
+
+    <h2>{{ prenda.titulo }}</h2>
+
+    <p>
+        {{ prenda.descripcion }}
+    </p>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <button type="submit">
+            Sí, eliminar
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/">
+        ← Cancelar y volver al inicio
+    </a>
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar prendas</title>
+</head>
+
+<body>
+
+    <h1>✏️ Editar prendas</h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label for="titulo">Título:</label>
+        <br>
+
+        <input
+            type="text"
+            id="titulo"
+            name="titulo"
+            value="{{ tarea.titulo }}"
+            required
+        >
+
+        <br><br>
+
+        <label for="descripcion">Descripción:</label>
+        <br>
+
+        <textarea
+            id="descripcion"
+            name="descripcion"
+            required
+        >{{ tarea.descripcion }}</textarea>
+
+        <br><br>
+
+        <label>
+            <input
+                type="checkbox"
+                name="disponible"
+                {% if tarea.completada %}checked{% endif %}
+            >
+            Prenda disponible
+        </label>
+
+        <br><br>
+
+        <br><br>
+
+        <!-- CAMBIO: Muestra la foto actual y opción para subir una nueva -->
+        {% if prenda.imagen %}
+            <p>Imagen actual:</p>
+            <img src="{{ prenda.imagen.url }}" alt="{{ prenda.nombre }}" width="150"><br><br>
+        {% endif %}
+
+        <label for="imagen">Cambiar o subir nueva imagen:</label>
+        <br>
+        <input type="file" id="imagen" name="imagen" accept="image/*">
+        
+        <br><br>
+        
+        <button type="submit">
+            Guardar cambios
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="{% url 'inicio' %}">
+        ← Volver al inicio
+    </a>
+
+</body>
+
+</html>

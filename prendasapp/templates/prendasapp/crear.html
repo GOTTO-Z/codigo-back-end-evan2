@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Prenda</title>
+</head>
+<body>
+
+    <h1>Crear nueva Prenda</h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label for="titulo">Título:</label>
+        <br>
+        <input type="text" id="titulo" name="titulo" required>
+
+        <br><br>
+
+        <label for="descripcion">Descripción:</label>
+        <br>
+        <textarea id="descripcion" name="descripcion" required></textarea>
+
+        <br><br>
+
+        <label>
+            <input type="checkbox" name="completada">
+            Hay stock
+        </label>
+
+        <br><br>
+
+        <label for="imagen">Imagen de la prenda:</label>
+        <br>
+        <input type="file" id="imagen" name="imagen" accept="image/*">
+
+        <br><br>
+
+        <button type="submit">
+            Guardar Prenda
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="{% url 'inicio' %}">Volver al inicio</a>
+
+</body>
+</html>
