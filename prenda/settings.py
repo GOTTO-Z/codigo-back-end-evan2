@@ -76,10 +76,15 @@ WSGI_APPLICATION = 'prenda.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'prendasapp',  # El nombre de la BD que creaste en phpMyAdmin
+        'USER': 'root',        # Usuario por defecto en XAMPP
+        'PASSWORD': '',        # Contraseña por defecto en XAMPP (suele estar vacía)
+        'HOST': '127.0.0.1',
+        'PORT': '3306',        # Puerto por defecto de MySQL en XAMPP
     }
 }
+
 
 
 # Password validation

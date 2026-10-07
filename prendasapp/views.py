@@ -12,11 +12,11 @@ def inicio(request):
 
 def crear_prenda(request):
     if request.method == 'POST':
-        nombre = request.POST['nombre']
+        nombre = request.POST.get('nombre')
         descripcion = request.POST['descripcion']
         disponible = 'disponible' in request.POST
 
-        imagen = request.FILES.get['imagen']
+        imagen = request.FILES.get('imagen')
 
         Prenda.objects.create(
             nombre=nombre,

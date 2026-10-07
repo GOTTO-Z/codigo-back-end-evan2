@@ -8,13 +8,13 @@
 
     <h1>Crear nueva Prenda</h1>
 
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data>
 
         {% csrf_token %}
 
         <label for="titulo">Título:</label>
         <br>
-        <input type="text" id="titulo" name="titulo" required>
+        <input type="text" id="nombre" name="nombre" required>
 
         <br><br>
 
