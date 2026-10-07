@@ -16,7 +16,7 @@ def crear_prenda(request):
         descripcion = request.POST['descripcion']
         disponible = 'disponible' in request.POST
 
-        imagen = request.FILES.get['imagen']
+        imagen = request.FILES.get('imagen')
 
         Prenda.objects.create(
             nombre=nombre,
