@@ -20,15 +20,9 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            font-family: "Segoe UI", Arial, sans-serif;
-            color: #1e293b;
-
-            background: linear-gradient(
-                135deg,
-                #dbeafe 0%,
-                #eff6ff 50%,
-                #bfdbfe 100%
-            );
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            background-color: #0a111e;
         }
 
         /* TARJETA DE INICIO DE SESIÓN */
@@ -36,24 +30,26 @@
             width: 100%;
             max-width: 420px;
             padding: 40px 35px;
-            background-color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.12);
+            background-color: #111c33;
+            border: 1px solid #1e2d4d;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
         }
 
         /* TÍTULO Y DESCRIPCIÓN */
         h1 {
             margin-bottom: 10px;
-            color: #1d4ed8;
-            font-size: 30px;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
             text-align: center;
-            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
         }
 
         .subtitulo {
             margin-bottom: 25px;
-            color: #64748b;
+            color: #8b9ab8;
             font-size: 14px;
             line-height: 1.5;
             text-align: center;
@@ -68,7 +64,7 @@
 
         label {
             margin-top: 8px;
-            color: #334155;
+            color: #cbd5e1;
             font-size: 14px;
             font-weight: 600;
         }
@@ -78,51 +74,46 @@
             padding: 13px 15px;
             font-family: inherit;
             font-size: 15px;
-            color: #1e293b;
-            background-color: #f8fafc;
-            border: 1px solid #cbd5e1;
-            border-radius: 10px;
+            color: #ffffff;
+            background-color: #0a111e;
+            border: 1px solid #1e2d4d;
+            border-radius: 8px;
             outline: none;
-
-            transition: border-color 0.2s,
-                        box-shadow 0.2s,
-                        background-color 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         input::placeholder {
-            color: #94a3b8;
+            color: #5b6b88;
         }
 
         input:hover {
-            border-color: #93c5fd;
+            border-color: #34476e;
         }
 
         input:focus {
-            background-color: #ffffff;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+            border-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
         }
 
-        /* BOTÓN */
+        /* BOTÓN (igual que "+ AGREGAR PRENDA") */
         button {
             width: 100%;
             margin-top: 20px;
             padding: 14px;
             font-family: inherit;
-            font-size: 16px;
-            font-weight: 600;
-            color: #ffffff;
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #0a111e;
+            background-color: #ffffff;
             border: none;
-            border-radius: 10px;
+            border-radius: 6px;
             cursor: pointer;
-
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: background-color 0.2s, transform 0.2s;
         }
 
         button:hover {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+            background-color: #e2e8f0;
             transform: translateY(-2px);
         }
 
@@ -131,7 +122,7 @@
         }
 
         button:focus-visible {
-            outline: 3px solid #93c5fd;
+            outline: 3px solid #34476e;
             outline-offset: 3px;
         }
 
@@ -139,7 +130,7 @@
         #mensaje {
             margin-top: 20px;
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 14px;
             text-align: center;
             overflow-wrap: anywhere;
@@ -150,28 +141,27 @@
         }
 
         #mensaje.exito {
-            color: #166534;
-            background-color: #dcfce7;
-            border: 1px solid #bbf7d0;
+            color: #4ade80;
+            background-color: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.35);
         }
 
         #mensaje.error {
-            color: #b91c1c;
-            background-color: #fee2e2;
-            border: 1px solid #fecaca;
+            color: #f87171;
+            background-color: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.35);
         }
 
         /* DISEÑO PARA CELULARES */
         @media (max-width: 480px) {
             .contenedor-login {
                 padding: 30px 22px;
-                border-radius: 16px;
             }
 
             h1 {
-                font-size: 26px;
+                font-size: 22px;
             }
-        }
+        }    
     </style>
 </head>
 
@@ -248,7 +238,7 @@
                     mensaje.textContent = 'Inicio de sesión correcto';
                     mensaje.className = 'exito';
 
-                    window.location.href = '/prenda/';
+                    window.location.href = '/prendas/';
                 } else {
                     mensaje.textContent =
                         datos.error || 'Error al iniciar sesión';

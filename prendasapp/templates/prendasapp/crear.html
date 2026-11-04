@@ -143,6 +143,19 @@
         .btn-volver:hover {
             background-color: #2a4365;
         }
+        .errores {
+        background-color: rgba(239, 68, 68, 0.15);
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        color: #f87171;
+        padding: 12px 15px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+        .errores p {
+        margin: 4px 0;
+    }
     </style>
 </head>
 <body>
@@ -155,32 +168,40 @@
         <h2>Agregar Nueva Prenda</h2>
 
         <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+        {% csrf_token %}
 
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required>
-            </div>
+        {% if errores %}
+        <div class="errores">
+            {% for e in errores %}
+                <p>{{ e }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
 
-            <div class="form-group">
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion" required></textarea>
-            </div>
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" value="{{ datos.nombre|default:'' }}">
+        </div>
 
-            <div class="checkbox-group">
-                <input type="checkbox" id="disponible" name="disponible" checked>
-                <label for="disponible">Prenda disponible en stock</label>
-            </div>
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion">{{ datos.descripcion|default:'' }}</textarea>
+        </div>
 
-            <div class="form-group">
-                <label for="imagen">Subir imagen de la prenda</label>
-                <input type="file" id="imagen" name="imagen" accept="image/*">
-            </div>
-            
-            <div class="botones">
-                <a href="{% url 'inicio' %}" class="btn btn-volver">Volver al catálogo</a>
-                <button type="submit" class="btn btn-guardar">Crear prenda</button>
-            </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="disponible" name="disponible" {% if not datos or datos.disponible %}checked{% endif %}>
+            <label for="disponible">Prenda disponible en stock</label>
+        </div>
+
+        <div class="form-group">
+            <label for="imagen">Subir imagen de la prenda</label>
+            <input type="file" id="imagen" name="imagen" accept="image/*">
+        </div>
+
+        <div class="botones">
+            <a href="{% url 'inicio' %}" class="btn btn-volver">Volver al catálogo</a>
+            <button type="submit" class="btn btn-guardar">Crear prenda</button>
+        </div>
         </form>
     </div>
 

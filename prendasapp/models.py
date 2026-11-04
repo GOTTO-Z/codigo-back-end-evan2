@@ -11,5 +11,3 @@ class Prenda(models.Model):
     def __str__(self):
         return self.nombre
 
-class Conjunto(models.Model):
-    pass
