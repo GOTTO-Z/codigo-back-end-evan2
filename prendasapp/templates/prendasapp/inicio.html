@@ -1,224 +1,236 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <title>Catálogo - Gustavini</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Prendas</title>
+
     <style>
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #0b1320;
-            color: #e2e8f0;
+        /* ESTILOS GENERALES (Mismo tema oscuro del login) */
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        .header {
-            background-color: #060b14;
-            padding: 30px 20px;
-            text-align: center;
-            border-bottom: 1px solid #1e3150;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 32px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
             color: #ffffff;
+            background-color: #0a111e;
+            padding: 20px;
         }
 
-        .contenedor {
-            width: 90%;
-            max-width: 1200px;
-            margin: 40px auto;
-        }
-
-        .acciones {
-            text-align: right;
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #111c33;
+            padding: 20px 30px;
+            border-radius: 12px;
+            border: 1px solid #1e2d4d;
             margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .boton-nuevo {
-            display: inline-block;
-            padding: 12px 20px;
-            background-color: #ffffff;
-            color: #0b1320;
-            text-decoration: none;
-            font-weight: bold;
+        header h1 {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); 
+            font-size: 24px;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            font-family: inherit;
             font-size: 14px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+            display: inline-block;
+            text-align: center;
         }
 
-        .boton-nuevo:hover {
-            background-color: #cbd5e1;
+        .btn:hover {
+            transform: translateY(-2px);
         }
 
-        .grid-prendas {
+        .btn-primario {
+            color: #0a111e;
+            background-color: #ffffff;
+        }
+
+        .btn-primario:hover {
+            background-color: #e2e8f0;
+        }
+
+        .btn-peligro {
+            color: white;
+            background-color: #f87171;
+        }
+
+        .btn-peligro:hover {
+            background-color: #ef4444;
+        }
+
+        .btn-secundario {
+            color: #ffffff;
+            background-color: #34476e;
+        }
+
+        .btn-secundario:hover {
+            background-color: #4a5d85;
+        }
+
+        .contenedor-prendas {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        .prenda-card {
-            background-color: #152238;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #1e3150;
-        }
-
-        .prenda-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-        }
-
-        .imagen-container {
-            width: 100%;
-            height: 350px;
-            background-color: #0d1829;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .imagen-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .sin-imagen {
-            color: #64748b;
-            font-style: italic;
-        }
-
-        .info-prenda {
+        .tarjeta-prenda {
+            background-color: #111c33;
+            border: 1px solid #1e2d4d;
+            border-radius: 12px;
             padding: 20px;
-            flex-grow: 1;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
         }
 
-        .info-prenda h2 {
-            margin: 0 0 10px 0;
+        .tarjeta-prenda img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background-color: #0a111e;
+        }
+
+        .tarjeta-prenda h2 {
             font-size: 20px;
-            text-transform: capitalize;
+            margin-bottom: 10px;
             color: #ffffff;
         }
 
-        .info-prenda .descripcion {
+        .tarjeta-prenda p {
+            color: #8b9ab8;
             font-size: 14px;
-            color: #94a3b8;
-            margin-bottom: 15px;
+            line-height: 1.5;
             flex-grow: 1;
+            margin-bottom: 15px;
         }
 
         .estado {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
-            margin-bottom: 15px;
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 4px;
-            display: inline-block;
+            margin-bottom: 15px;
+            align-self: flex-start;
         }
 
-        .estado.disponible {
-            background-color: rgba(46, 204, 113, 0.15);
-            color: #4ade80;
-        }
+        .disponible { background-color: rgba(74, 222, 128, 0.2); color: #4ade80; }
+        .agotado { background-color: rgba(248, 113, 113, 0.2); color: #f87171; }
 
-        .estado.agotado {
-            background-color: rgba(231, 76, 60, 0.15);
-            color: #f87171;
-        }
-
-        .botones {
+        .acciones {
             display: flex;
             gap: 10px;
-            border-top: 1px solid #1e3150;
-            padding-top: 15px;
+            margin-top: auto;
         }
 
-        .botones a {
+        .acciones .btn {
             flex: 1;
-            text-align: center;
-            text-decoration: none;
-            color: #e2e8f0;
-            font-size: 13px;
-            padding: 8px 0;
-            border-radius: 4px;
-            background-color: #1e3150;
-            transition: background-color 0.2s;
-        }
-
-        .botones a:hover {
-            background-color: #2a4365;
-        }
-
-        .botones a.eliminar:hover {
-            background-color: #8c2323;
-            color: white;
+            padding: 8px;
+            font-size: 12px;
         }
     </style>
 </head>
 
 <body>
 
-<div class="header">
-    <h1>Gustavini</h1>
-</div>
+    <!-- CABECERA CON BOTÓN DE CERRAR SESIÓN -->
+    <header>
+        <h1>Gustavini</h1>
+        <div>
+            <a href="{% url 'crear_prenda' %}" class="btn btn-primario" style="margin-right: 15px;">+ Agregar Prenda</a>
+            <button id="btnCerrarSesion" class="btn btn-peligro">Cerrar Sesión</button>
+        </div>
+    </header>
 
-<div class="contenedor">
-
-    <div class="acciones">
-        <a href="{% url 'crear_prenda' %}" class="boton-nuevo">
-            + Agregar Prenda
-        </a>
-    </div>
-
-    <div class="grid-prendas">
-        {% for prenda in prendas %}
-            <div class="prenda-card">
-                
-                <div class="imagen-container">
-                    {% if prenda.imagen %}
-                        <img src="{{ prenda.imagen.url }}" alt="{{ prenda.nombre }}">
-                    {% else %}
-                        <span class="sin-imagen">Sin imagen disponible</span>
-                    {% endif %}
-                </div>
-                
-                <div class="info-prenda">
-                    <h2>{{ prenda.nombre }}</h2>
-                    <div class="descripcion">{{ prenda.descripcion }}</div>
+    <!-- LISTADO DE PRENDAS -->
+    <main>
+        <div class="contenedor-prendas">
+            {% for prenda in prendas %}
+                <div class="tarjeta-prenda">
                     
-                    <div>
-                        {% if prenda.disponible %}
-                            <span class="estado disponible">Disponible</span>
-                        {% else %}
-                            <span class="estado agotado">Agotado</span>
-                        {% endif %}
-                    </div>
+                    {% if prenda.imagen %}
+                        <img src="{{ prenda.imagen.url }}" alt="Imagen de {{ prenda.nombre }}">
+                    {% else %}
+                        <div style="height: 200px; background-color: #0a111e; border-radius: 8px; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; color: #5b6b88;">
+                            Sin Imagen
+                        </div>
+                    {% endif %}
 
-                    <div class="botones">
-                        <a href="{% url 'detalle_prenda' prenda.id %}">Ver</a>
-                        <a href="{% url 'editar_prenda' prenda.id %}">Editar</a>
-                        <a href="{% url 'eliminar_prenda' prenda.id %}" class="eliminar">Eliminar</a>
+                    <h2>{{ prenda.nombre }}</h2>
+                    
+                    {% if prenda.disponible %}
+                        <span class="estado disponible">Disponible</span>
+                    {% else %}
+                        <span class="estado agotado">No Disponible</span>
+                    {% endif %}
+
+                    <p>{{ prenda.descripcion }}</p>
+
+                    <div class="acciones">
+                        <a href="{% url 'detalle_prenda' prenda.id %}" class="btn btn-secundario">Ver</a>
+                        <a href="{% url 'editar_prenda' prenda.id %}" class="btn btn-primario">Editar</a>
+                        <a href="{% url 'eliminar_prenda' prenda.id %}" class="btn btn-peligro">Borrar</a>
                     </div>
                 </div>
+            {% empty %}
+                <p style="color: #8b9ab8; grid-column: 1 / -1; text-align: center; padding: 40px;">
+                    Aún no has agregado ninguna prenda.
+                </p>
+            {% endfor %}
+        </div>
+    </main>
 
-            </div>
-        {% empty %}
-            <p>El catálogo está vacío actualmente.</p>
-        {% endfor %}
-    </div>
+    <!-- SCRIPT PARA CERRAR SESIÓN -->
+    <script>
+        const btnCerrarSesion = document.getElementById('btnCerrarSesion');
 
-</div>
+        btnCerrarSesion.addEventListener('click', async function() {
+            const token = sessionStorage.getItem('token');
+
+            if (token) {
+                try {
+                    await fetch('/api/logout/', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Token ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error al cerrar sesión en la API:', error);
+                }
+            }
+
+            sessionStorage.removeItem('token');
+
+            window.location.href = "{% url 'logout' %}";
+        });
+    </script>
 
 </body>
 </html>
