@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de la prenda - Gustavini</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #0b1320;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #060b14;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid #1e3150;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #ffffff;
+        }
+
+        .contenedor {
+            width: 90%;
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #152238;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #1e3150;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 22px;
+        }
+
+        .informacion {
+            margin-top: 20px;
+        }
+
+        .informacion p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        .informacion strong {
+            color: #ffffff;
+        }
+
+        .estado-disponible {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .estado-agotado {
+            color: #f87171;
+            font-weight: bold;
+        }
+
+        .imagen-prenda {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 1px solid #1e3150;
+            background-color: #0d1829;
+            padding: 10px;
+        }
+
+        .boton {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background-color: #1e3150;
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+            border-radius: 4px;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .boton:hover {
+            background-color: #2a4365;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Gustavini</h1>
+    </div>
+
+    <div class="contenedor">
+
+        <h2>👁️ Detalle de la prenda</h2>
+
+        <div class="informacion">
+            <p>
+                <strong>ID:</strong> {{ prenda.id }}
+            </p>
+
+            <p>
+                <strong>Nombre:</strong> {{ prenda.nombre }}
+            </p>
+
+            <p>
+                <strong>Descripción:</strong> {{ prenda.descripcion }}
+            </p>
+            
+            <p>
+                <strong>Estado:</strong>
+                {% if prenda.disponible %}
+                    <span class="estado-disponible">Disponible ✅</span>
+                {% else %}
+                    <span class="estado-agotado">No disponible ❌</span>
+                {% endif %}
+            </p>
+            
+            <p><strong>Imagen:</strong></p>
+            {% if prenda.imagen %}
+                <img src="{{ prenda.imagen.url }}" alt="{{ prenda.nombre }}" class="imagen-prenda">
+            {% else %}
+                <p><em>Sin imagen asignada</em></p>
+            {% endif %}
+        </div>
+
+        <a href="{% url 'inicio' %}" class="boton">
+            ← Volver al catálogo
+        </a>
+
+    </div>
+
+</body>
+</html>
