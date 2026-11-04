@@ -48,6 +48,25 @@
             letter-spacing: 2px;
         }
 
+        /* ESTILOS PARA LOS ERRORES */
+        .errores-contenedor {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #f87171;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+        }
+
+        .errores-contenedor ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .errores-contenedor li {
+            margin-bottom: 5px;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -170,6 +189,17 @@
     <div class="contenedor">
         <h2>Editar Prenda</h2>
 
+        
+        {% if errores %}
+            <div class="errores-contenedor">
+                <ul>
+                    {% for error in errores %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
@@ -180,7 +210,7 @@
 
             <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion" required>{{ prenda.descripcion }}</textarea>
+                <textarea id="descripcion" name="descripcion" maxlength="250" required>{{ datos.descripcion|default_if_none:'' }}</textarea>
             </div>
 
             <div class="checkbox-group">

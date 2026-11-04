@@ -70,7 +70,7 @@ def crear_prenda(request):
         disponible = 'disponible' in request.POST
         imagen = request.FILES.get('imagen')
 
-        errores = validar_prenda(nombre, descripcion, imagen)
+        errores = validar_prenda(nombre, descripcion, imagen, imagen_obligatoria=True)
         if errores:
             return render(request, 'prendasapp/crear.html', {
                 'errores': errores,
@@ -103,8 +103,11 @@ def editar_prenda(request, id):
         descripcion = request.POST.get('descripcion', '')
         imagen = request.FILES.get('imagen')
 
-        errores = validar_prenda(nombre, descripcion, imagen, imagen_obligatoria=True)
+        errores = validar_prenda(nombre, descripcion, imagen)
         if errores:
+            prenda.nombre = nombre
+            prenda.descripcion = descripcion
+            prenda.disponible = 'disponible' in request.POST
             return render(request, 'prendasapp/editar.html', {
                 'prenda': prenda,
                 'errores': errores
